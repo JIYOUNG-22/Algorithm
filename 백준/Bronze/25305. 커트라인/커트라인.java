@@ -9,16 +9,14 @@ public class Main {
 		int n = Integer.parseInt(st.nextToken());
 		int k = Integer.parseInt(st.nextToken());
 		
-		PriorityQueue<Integer> pq = new PriorityQueue<>((a,b) -> b - a);
+		int[] grades = new int[n];
 		st = new StringTokenizer(br.readLine());
 		for(int i = 0; i < n; i++) {
-			pq.offer(Integer.parseInt(st.nextToken()));
+			grades[i] = Integer.parseInt(st.nextToken());
 		}
 		
-		for(int i = 0; i < k-1; i++) {
-			pq.poll();
-		}
-		
-		System.out.println(pq.poll());
+		Arrays.sort(grades);
+		System.out.println(grades[n-k]);
 	}
+	
 }
