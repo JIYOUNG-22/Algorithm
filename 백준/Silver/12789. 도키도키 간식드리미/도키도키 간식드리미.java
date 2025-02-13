@@ -21,7 +21,7 @@ public class Main {
 					stack.push(queue.poll());
 				}
 				queue.poll();
-			} else if(stack.contains(number)) {
+			} else {
 				if(stack.peek() == number) stack.pop();
 				else break;
 			}
