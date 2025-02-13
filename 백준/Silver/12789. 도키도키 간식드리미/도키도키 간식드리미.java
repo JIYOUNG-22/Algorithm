@@ -15,7 +15,7 @@ public class Main {
 		}
 		
 		int number = 1;
-		while(number <= n) {
+		while(number < n) {
 			if(queue.contains(number)) {
 				while(queue.peek() != number) {
 					stack.push(queue.poll());
@@ -28,6 +28,6 @@ public class Main {
 			number++;
 		}
 		
-		System.out.println(number >= n ? "Nice" : "Sad");
+		System.out.println(number == n ? "Nice" : "Sad");
 	}
 }
