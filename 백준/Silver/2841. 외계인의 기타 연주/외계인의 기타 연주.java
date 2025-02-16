@@ -12,36 +12,18 @@ public class Main {
         st = new StringTokenizer(br.readLine());
         n = Integer.parseInt(st.nextToken());
         p = Integer.parseInt(st.nextToken());
-
-        Stack<Integer> stack1 = new Stack<>();
-        Stack<Integer> stack2 = new Stack<>();
-        Stack<Integer> stack3 = new Stack<>();
-        Stack<Integer> stack4 = new Stack<>();
-        Stack<Integer> stack5 = new Stack<>();
-        Stack<Integer> stack6 = new Stack<>();
+		
+		Stack<Integer>[] stacks = new Stack[6];
+		for(int i = 0; i < 6; i++) {
+			stacks[i] = new Stack<>();
+		}
 
         for(int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
-            switch(Integer.parseInt(st.nextToken())) {
-                case 1:
-                    melody(stack1, Integer.parseInt(st.nextToken()));
-                    break;
-                case 2:
-                    melody(stack2, Integer.parseInt(st.nextToken()));
-                    break;
-                case 3:
-                    melody(stack3, Integer.parseInt(st.nextToken()));
-                    break;
-                case 4:
-                    melody(stack4, Integer.parseInt(st.nextToken()));
-                    break;
-                case 5:
-                    melody(stack5, Integer.parseInt(st.nextToken()));
-                    break;
-                case 6:
-                    melody(stack6, Integer.parseInt(st.nextToken()));
-                    break;
-            }
+            int line = Integer.parseInt(st.nextToken()) -1;
+			int fret = Integer.parseInt(st.nextToken());
+			
+			melody(stacks[line], fret);
         }
 
         System.out.println(count);
