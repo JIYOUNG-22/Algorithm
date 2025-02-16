@@ -20,6 +20,7 @@ public class Main {
 
         int dead = 0, count = 0;
         Set<Integer> set = new HashSet<>();
+		set.add(0);
         while(dead != k) {
             dead = point[dead];
             count++;
