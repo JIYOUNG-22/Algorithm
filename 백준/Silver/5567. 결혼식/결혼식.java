@@ -1,11 +1,14 @@
 import java.io.*;
 import java.util.*;
-
+	
 public class Main {
 
-	static ArrayList<Integer>[] graph;
+		static ArrayList<Integer>[] graph;
     static boolean[] visited;
-    static int[] dis;
+    static int[] dist;
+    static int result = 0;
+    
+    static final int MAX_DIST = 2;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -13,7 +16,7 @@ public class Main {
         int m = Integer.parseInt(br.readLine());   // 리스트(관계)의 길이
 
         visited = new boolean[n+1];
-        dis = new int[n+1];
+        dist = new int[n+1];
 
         // graph 초기화
         graph = new ArrayList[n+1];
@@ -32,30 +35,30 @@ public class Main {
 
         dfs(1);
 
-        int result = 0;
-        for(int i : dis) {
-            if(i == 1 || i == 2) result++;
-        }
-
-        System.out.println(result);
+				// 본인 제외
+        System.out.println(result - 1);
     }
 
     public static void dfs(int index) {
         Queue<Integer> queue = new LinkedList<>();
 
-        if(visited[index]) return;
         queue.offer(index);
         visited[index] = true;
 
         while(!queue.isEmpty()) {
-            for(int i : graph[queue.peek()]) {
-                if(!visited[i]) {
-                    queue.offer(i);
-                    visited[i] = true;
-                    dis[i] = dis[queue.peek()] + 1;
-                }
-            }
-            queue.poll();
+	        int currNode = queue.poll();
+	        result++;
+	        
+	        // 친구의 친구일 경우 더 확인할 필요 없음
+	        if(dist[currNode] == MAX_DIST) continue;
+	        
+          for(int nextNode : graph[currNode]) {
+              if(!visited[nextNode]) {
+                  queue.offer(nextNode);
+                  visited[nextNode] = true;
+                  dist[nextNode] = dist[currNode] + 1;
+              }
+           }
         }
     }
 }
