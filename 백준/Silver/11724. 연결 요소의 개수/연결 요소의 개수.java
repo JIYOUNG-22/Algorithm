@@ -3,50 +3,49 @@ import java.util.*;
 
 public class Main {
 
-	static boolean[] visited;
-	static ArrayList<Integer>[] arr;
-	static int count = 0;
-	
-	public static void main(String[] args) throws Exception{
+	static ArrayList<Integer>[] graph;	// 그래프 표현
+	static boolean[] visited;   // 방문 확인 배열
+		
+	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
+		int N = Integer.parseInt(st.nextToken());   // 정점의 개수 N
+		int M = Integer.parseInt(st.nextToken());   // 간선의 개수 M
 		
-		int n = Integer.parseInt(st.nextToken());   // 정점의 개수 n
-		int m = Integer.parseInt(st.nextToken());   // 간선의 개수 m
-		
-		visited = new boolean[n+1];   // 방문 확인 배열
-		arr = new ArrayList[n+1];   // graph
-		for(int i = 1; i < n+1; i++) {
-			arr[i] = new ArrayList<Integer>();
+		// graph 초기화
+		graph = new ArrayList[N + 1];
+		for(int i = 1; i <= N; i++) {
+			graph[i] = new ArrayList<Integer>();
 		}
+		// 방문 배열 초기화
+		visited = new boolean[N + 1];
 		
-		for(int i = 0; i < m; i++) {
+		for(int i = 0; i < M; i++) {
 			st = new StringTokenizer(br.readLine());
 			int a = Integer.parseInt(st.nextToken());
 			int b = Integer.parseInt(st.nextToken());
 			
-			arr[a].add(b);
-			arr[b].add(a);
+			graph[a].add(b);
+			graph[b].add(a);
 		}
 		
-		for(int i = 1; i < n+1; i++) {
+		int result = 0;
+		for(int i = 1; i <= N; i++) {
 			if(!visited[i]) {
 				dfs(i);
-				count++;
+				result++;
 			}
 		}
 		
-		System.out.println(count);
-		
+		System.out.println(result);
 	}
 	
 	static void dfs(int index) {
 		if(visited[index]) return;
-		else {
-			visited[index] = true;
-			for(int a : arr[index]) {
-				dfs(a);
-			}
+		visited[index] = true;
+		
+		for(int node : graph[index]) {
+			if(!visited[node]) dfs(node);
 		}
 	}
 }
