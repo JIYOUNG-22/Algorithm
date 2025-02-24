@@ -33,6 +33,7 @@ public class Main {
       // DFS
       for(int i = 0; i < N; i++) {
           dfs(i, 0);
+          if(isTrue) break;
       }
 
       System.out.println(isTrue ? 1 : 0);
