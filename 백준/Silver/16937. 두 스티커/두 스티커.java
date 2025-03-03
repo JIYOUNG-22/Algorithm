@@ -17,15 +17,10 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int h = Integer.parseInt(st.nextToken());
         int w = Integer.parseInt(st.nextToken());
-        int max = Math.max(h, w);
-        int min = Math.min(h, w);
 
         ArrayList<Sticker> list = new ArrayList<>();
         int n = Integer.parseInt(br.readLine());
-        if(n==1) {
-            System.out.println(0);
-            return;
-        }
+
         for(int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
             int x = Integer.parseInt(st.nextToken());
@@ -43,13 +38,13 @@ public class Main {
                 int c = list.get(j).x;
                 int d = list.get(j).y;
 
-                if(Math.max(a, d) <= max && b + c <= min || Math.max(a, d) <= min && b + c <= max) {
+                if(Math.max(a, d) <= h && b + c <= w || Math.max(a, d) <= w && b + c <= h) {
                     maxArea = Math.max(maxArea, a*b + c*d);
-                } else if(Math.max(a, c) <= max && b + d <= min || Math.max(a, c) <= min && b + d <= max) {
+                } else if(Math.max(a, c) <= h && b + d <= w || Math.max(a, c) <= w && b + d <= h) {
                     maxArea = Math.max(maxArea, a*b + c*d);
-                } else if(Math.max(b, c) <= max && a + d <= min || Math.max(b, c) <= min && a + d <= max) {
+                } else if(Math.max(b, c) <= h && a + d <= w || Math.max(b, c) <= w && a + d <= h) {
                     maxArea = Math.max(maxArea, a*b + c*d);
-                } else if(Math.max(b, d) <= max && a + c <= min || Math.max(b, d) <= min && a + c <= max) {
+                } else if(Math.max(b, d) <= h && a + c <= w || Math.max(b, d) <= w && a + c <= h) {
                     maxArea = Math.max(maxArea, a*b + c*d);
                 }
             }
