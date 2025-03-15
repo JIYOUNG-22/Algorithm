@@ -4,14 +4,14 @@ import java.util.*;
 public class Main {
     static ArrayList<Integer>[] graph;
     static boolean[] visited;
-    static int[] root;
+    static int[] parent;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());   // 노드의 개수
 
         visited = new boolean[n+1];
-        root = new int[n+1];
+        parent = new int[n+1];
         graph = new ArrayList[n+1];
         for(int i = 1; i <= n; i++) {
             graph[i] = new ArrayList<Integer>();
@@ -28,9 +28,11 @@ public class Main {
 
         dfs(1);
 
+				StringBuilder sb = new StringBuilder();
         for(int i = 2; i <= n; i++) {
-            System.out.println(root[i]);
+            sb.append(parent[i]).append("\n");
         }
+        System.out.println(sb.toString().trim());
     }
 
     static void dfs(int now) {
@@ -39,7 +41,7 @@ public class Main {
         visited[now] = true;
         for(int next : graph[now]) {
             if(!visited[next]) {
-                root[next] = now;
+                parent[next] = now;
                 dfs(next);
             }
         }
