@@ -17,6 +17,7 @@ public class Main {
             parent[i] = i;
         }
 
+        StringBuilder sb = new StringBuilder();
         for(int i = 0; i < m; i++) {
             st = new StringTokenizer(br.readLine());
             int type = Integer.parseInt(st.nextToken());
@@ -26,9 +27,12 @@ public class Main {
             if(type == 0) {
                 union(a, b);
             } else {
-                System.out.println(isUnion(a, b) ? "yes" : "no");
+                if(isUnion(a, b)) sb.append("yes").append("\n");
+                else sb.append("no").append("\n");
+//                System.out.println(isUnion(a, b) ? "yes" : "no");
             }
         }
+        System.out.println(sb);
     }
 
     static int find(int x) {
